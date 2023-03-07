@@ -9,3 +9,9 @@
     min-width: 100%;
   }
 }
+
+@media screen and (max-width: 770px) {
+  .header {
+    padding-top: 28px;
+  }
+}
