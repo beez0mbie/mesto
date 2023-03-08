@@ -1,2 +1,8 @@
 .element__heart {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.element__heart:hover {
+  opacity: 0.5;
 }
