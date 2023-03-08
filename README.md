@@ -27,4 +27,4 @@
 
 **GitHub Pages**
 
-[Проект Mesto на gitHub]()
+[Проект Mesto на gitHub](https://beez0mbie.github.io/mesto/)
