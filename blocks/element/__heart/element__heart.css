@@ -1,5 +1,9 @@
 .element__heart {
+  min-width: 22px;
+  padding: 0;
+  border: 0;
   cursor: pointer;
+  background: center no-repeat url("../../../images/Icon_heart_default.svg");
   transition: opacity 0.3s;
 }
 

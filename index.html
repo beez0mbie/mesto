@@ -30,11 +30,19 @@
           <div class="profile__info">
             <div class="profile__title-container">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button"></button>
+              <button
+                aria-label="Редактировать профиль"
+                type="button"
+                class="profile__edit-button"
+              ></button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-          <button class="profile__add-button"></button>
+          <button
+            aria-label="Добавить карточку"
+            type="button"
+            class="profile__add-button"
+          ></button>
         </section>
         <section class="elements">
           <div class="element">
@@ -47,11 +55,11 @@
             </figure>
             <div class="element__info">
               <h2 class="element__title">Карачаево-Черкесия</h2>
-              <img
-                src="./images/Icon_heart_default.svg"
-                alt="Иконка сердца"
+              <button
+                aria-label="Лайк"
+                type="button"
                 class="element__heart"
-              />
+              ></button>
             </div>
           </div>
           <div class="element">
@@ -64,11 +72,11 @@
             </figure>
             <div class="element__info">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <img
-                src="./images/Icon_heart_default.svg"
-                alt="Иконка сердца"
+              <button
+                aria-label="Лайк"
+                type="button"
                 class="element__heart"
-              />
+              ></button>
             </div>
           </div>
           <div class="element">
@@ -81,11 +89,11 @@
             </figure>
             <div class="element__info">
               <h2 class="element__title">Домбай</h2>
-              <img
-                src="./images/Icon_heart_default.svg"
-                alt="Иконка сердца"
+              <button
+                aria-label="Лайк"
+                type="button"
                 class="element__heart"
-              />
+              ></button>
             </div>
           </div>
           <div class="element">
@@ -98,11 +106,11 @@
             </figure>
             <div class="element__info">
               <h2 class="element__title">Ай-петри</h2>
-              <img
-                src="./images/Icon_heart_default.svg"
-                alt="Иконка сердца"
+              <button
+                aria-label="Лайк"
+                type="button"
                 class="element__heart"
-              />
+              ></button>
             </div>
           </div>
           <div class="element">
@@ -115,11 +123,11 @@
             </figure>
             <div class="element__info">
               <h2 class="element__title">Кижи</h2>
-              <img
-                src="./images/Icon_heart_default.svg"
-                alt="Иконка сердца"
+              <button
+                aria-label="Лайк"
+                type="button"
                 class="element__heart"
-              />
+              ></button>
             </div>
           </div>
           <div class="element">
@@ -132,11 +140,11 @@
             </figure>
             <div class="element__info">
               <h2 class="element__title">Ласточкино гнездо</h2>
-              <img
-                src="./images/Icon_heart_default.svg"
-                alt="Иконка сердца"
+              <button
+                aria-label="Лайк"
+                type="button"
                 class="element__heart"
-              />
+              ></button>
             </div>
           </div>
         </section>
@@ -147,17 +155,23 @@
     </div>
     <div class="popup">
       <div class="popup__container">
-        <img
-          src="./images/Icon_close.svg"
-          alt="Иконка крестик-закрыть"
+        <button
+          aria-label="Закрыть попап"
+          type="button"
           class="popup__close-button"
-        />
+        ></button>
         <form action="./" class="popup__form">
           <fieldset class="popup__fieldset">
             <h2 class="popup__title">Редактировать профиль</h2>
             <input type="text" class="popup__input" />
             <input type="text" class="popup__input" />
-            <input type="submit" value="Сохранить" class="popup__button" />
+            <button
+              type="submit"
+              aria-label="Сохранить  изменения"
+              class="popup__button"
+            >
+              Сохранить
+            </button>
           </fieldset>
         </form>
       </div>
