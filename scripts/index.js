@@ -1,22 +1,22 @@
 let page = document.querySelector(".page");
-let profileEditButton = page.querySelector(".profile__edit-button");
 
+//Элементы профиля
+let profileEditButton = page.querySelector(".profile__edit-button");
+let profileName = page.querySelector(".profile__title");
+let profileJob = page.querySelector(".profile__subtitle");
+
+//Элементы попап меню
 let popup = document.querySelector(".popup");
 let closePopupButton = popup.querySelector(".popup__close-button");
-
 let form = popup.querySelector(".popup__form");
-let formInputs = form.querySelectorAll(".popup__input");
-let nameInput = formInputs[0];
-let jobInput = formInputs[1];
+let nameInput = document.getElementById("popup-input-name");
+let jobInput = document.getElementById("popup-input-job");
 
 function handleOpenPopup() {
-  let profileNameText = page.querySelector(".profile__title").textContent;
-  let profileJobText = page.querySelector(".profile__subtitle").textContent;
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
 
   popup.classList.add("popup_opened");
-
-  nameInput.value = profileNameText;
-  jobInput.value = profileJobText;
 }
 
 function handleClosePopup() {
@@ -26,14 +26,8 @@ function handleClosePopup() {
 function handleFormSubmit(evt) {
   evt.preventDefault();
 
-  let name = nameInput.value;
-  let job = jobInput.value;
-
-  let profileName = page.querySelector(".profile__title");
-  let profileJob = page.querySelector(".profile__subtitle");
-
-  profileName.textContent = name;
-  profileJob.textContent = job;
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
 
   handleClosePopup();
 }
