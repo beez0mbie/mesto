@@ -1,0 +1,12 @@
+.content {
+  min-width: 880px;
+}
+
+@media screen and (max-width: 920px) {
+  .content {
+    box-sizing: border-box;
+    min-width: 100%;
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
