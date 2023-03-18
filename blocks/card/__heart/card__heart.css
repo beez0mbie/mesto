@@ -1,4 +1,4 @@
-.element__heart {
+.card__heart {
   min-width: 22px;
   padding: 0;
   border: 0;
@@ -7,6 +7,6 @@
   transition: opacity 0.3s;
 }
 
-.element__heart:hover {
+.card__heart:hover {
   opacity: 0.5;
 }

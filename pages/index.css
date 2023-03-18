@@ -31,17 +31,17 @@
 @import url(../blocks/profile/__title-container/profile__title-container.css);
 @import url(../blocks/profile/__title/profile__title.css);
 
-/* elements */
+/* cards */
 
-@import url(../blocks/elements/elements.css);
+@import url(../blocks/cards/cards.css);
 
-/* element */
+/* card */
 
-@import url(../blocks/element/element.css);
-@import url(../blocks/element/__heart/element__heart.css);
-@import url(../blocks/element/__image/element__image.css);
-@import url(../blocks/element/__info/element__info.css);
-@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__heart/card__heart.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__info/card__info.css);
+@import url(../blocks/card/__title/card__title.css);
 
 /* footer */
 @import url(../blocks/footer/footer.css);
