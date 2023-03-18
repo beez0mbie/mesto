@@ -7,6 +7,13 @@ const templateCard = document.querySelector("#card").content;
 //Общий метод добавления карточек
 const addCard = (cardName, cardLink) => {
   const cardElement = templateCard.querySelector(".card").cloneNode(true);
+
+  const heart = cardElement.querySelector(".card__heart");
+
+  heart.addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__heart_active");
+  });
+
   cardElement.querySelector(".card__image").src = cardLink;
   cardElement.querySelector(".card__image").alt = `Фото: ${cardName}`;
   cardElement.querySelector(".card__title").textContent = cardName;
