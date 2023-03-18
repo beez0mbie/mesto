@@ -5,36 +5,31 @@ let profileEditButton = page.querySelector(".profile__edit-button");
 let profileName = page.querySelector(".profile__title");
 let profileJob = page.querySelector(".profile__subtitle");
 
-//Элементы попап меню
-let popup = document.querySelector(".popup");
-let closePopupButton = popup.querySelector(".popup__close-button");
-let form = popup.querySelector(".popup__form");
+//Элементы попап меню профиля
+let popupProfile = document.querySelector("#popupChangeProfile");
+let closePopupButton = popupProfile.querySelector(".popup__close-button");
+let formProfile = popupProfile.querySelector(".popup__form");
 let nameInput = document.getElementById("popup-input-name");
 let jobInput = document.getElementById("popup-input-job");
+nameInput.value = profileName.textContent;
+jobInput.value = profileJob.textContent;
 
-function handleOpenPopup() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-
-  popup.classList.add("popup_opened");
+function togglePopup(popup) {
+  popup.classList.toggle("popup_opened");
 }
 
-function handleClosePopup() {
-  popup.classList.remove("popup_opened");
-}
-
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  handleClosePopup();
+  togglePopup(popupProfile);
 }
 
-profileEditButton.addEventListener("click", handleOpenPopup);
-closePopupButton.addEventListener("click", handleClosePopup);
-form.addEventListener("submit", handleFormSubmit);
+profileEditButton.addEventListener("click", () => togglePopup(popupProfile));
+closePopupButton.addEventListener("click", () => togglePopup(popupProfile));
+formProfile.addEventListener("submit", handleProfileFormSubmit);
 
 // Cards
 const fillInitialCards = () => {
