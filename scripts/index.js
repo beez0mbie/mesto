@@ -1,5 +1,10 @@
 let page = document.querySelector(".page");
 
+//Общий метод открытия закрытия попапа
+const togglePopup = (popup) => {
+  popup.classList.toggle("popup_opened");
+};
+
 //Элементы профиля
 let profileEditButton = page.querySelector(".profile__edit-button");
 let profileName = page.querySelector(".profile__title");
@@ -14,18 +19,14 @@ let jobInput = document.getElementById("popup-input-job");
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
 
-function togglePopup(popup) {
-  popup.classList.toggle("popup_opened");
-}
-
-function handleProfileFormSubmit(evt) {
+const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
   togglePopup(popupProfile);
-}
+};
 
 profileEditButton.addEventListener("click", () => togglePopup(popupProfile));
 closePopupButton.addEventListener("click", () => togglePopup(popupProfile));
