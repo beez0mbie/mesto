@@ -14,6 +14,12 @@ const addCard = (cardName, cardLink) => {
     evt.target.classList.toggle("card__heart_active");
   });
 
+  const trash = cardElement.querySelector(".card__trash");
+
+  trash.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
   cardElement.querySelector(".card__image").src = cardLink;
   cardElement.querySelector(".card__image").alt = `Фото: ${cardName}`;
   cardElement.querySelector(".card__title").textContent = cardName;
