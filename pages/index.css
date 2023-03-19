@@ -60,3 +60,8 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__title/popup__title.css);
+
+/* popup-img */
+@import url(../blocks/popup-img/popup-img.css);
+@import url(../blocks/popup-img/__image/popup-img__image.css);
+@import url(../blocks/popup-img/__figcaption/popup-img__figcaption.css);
