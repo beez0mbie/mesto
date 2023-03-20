@@ -1,38 +1,45 @@
-let page = document.querySelector(".page");
+const page = document.querySelector(".page");
 
-//Общий метод открытия закрытия попапа
-const togglePopup = (popup) => {
-  popup.classList.toggle("popup_opened");
+//Общий метод открытия попапа
+const openPopup = (popup) => {
+  popup.classList.add("popup_opened");
+};
+//Общий метод закрытия попапа
+const closePopup = (popup) => {
+  popup.classList.remove("popup_opened");
 };
 
-const closePopupByClickOnOverlay = (evt) => {
-  if (evt.target !== evt.currentTarget) {
-    return;
-  }
-  togglePopup(evt.target);
-};
+// Найти и закрыть все попапы по крестику или оверлею
+const popups = document.querySelectorAll(".popup");
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (
+      evt.target.classList.contains("popup_opened") ||
+      evt.target.classList.contains("popup__close-button")
+    ) {
+      closePopup(popup);
+    }
+  });
+});
 
 //Попап картинки
-let popupImage = document.querySelector("#popup-image");
-let popupImageElement = popupImage.querySelector(".popup-img__image");
-let popupFigcaption = popupImage.querySelector(".popup-img__figcaption");
-let closePopupImageButton = popupImage.querySelector(".popup__close-button");
-closePopupImageButton.addEventListener("click", () => togglePopup(popupImage));
-popupImage.addEventListener("click", closePopupByClickOnOverlay);
+const popupImage = document.querySelector("#popup-image");
+const popupImageElement = popupImage.querySelector(".popup-img__image");
+const popupFigcaption = popupImage.querySelector(".popup-img__figcaption");
 
 //Элементы профиля
-let profileEditButton = page.querySelector(".profile__edit-button");
-let profileName = page.querySelector(".profile__title");
-let profileJob = page.querySelector(".profile__subtitle");
+const profileEditButton = page.querySelector(".profile__edit-button");
+const profileName = page.querySelector(".profile__title");
+const profileJob = page.querySelector(".profile__subtitle");
 
 //Элементы попап меню профиля
-let popupProfile = document.querySelector("#popup-change-profile");
-let closePopupProfileButton = popupProfile.querySelector(
+const popupProfile = document.querySelector("#popup-change-profile");
+const closePopupProfileButton = popupProfile.querySelector(
   ".popup__close-button"
 );
-let formProfile = popupProfile.querySelector(".popup-form");
-let nameInput = popupProfile.querySelector("#popup-input-name");
-let jobInput = popupProfile.querySelector("#popup-input-job");
+const formProfile = popupProfile.querySelector(".popup-form");
+const nameInput = popupProfile.querySelector("#popup-input-name");
+const jobInput = popupProfile.querySelector("#popup-input-job");
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
 
@@ -42,19 +49,15 @@ const handleProfileFormSubmit = (evt) => {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  togglePopup(popupProfile);
+  closePopup(popupProfile);
 };
 
-profileEditButton.addEventListener("click", () => togglePopup(popupProfile));
-closePopupProfileButton.addEventListener("click", () =>
-  togglePopup(popupProfile)
-);
-popupProfile.addEventListener("click", closePopupByClickOnOverlay);
+profileEditButton.addEventListener("click", () => openPopup(popupProfile));
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 
 //Общие элементы карт
-let cardsElement = page.querySelector(".cards");
-let templateCard = document.querySelector("#card").content;
+const cardsElement = page.querySelector(".cards");
+const templateCard = document.querySelector("#card").content;
 
 //Общий метод добавления карточек
 const addCard = (cardName, cardLink) => {
@@ -75,7 +78,7 @@ const addCard = (cardName, cardLink) => {
     popupImageElement.src = cardLink;
     popupImageElement.alt = `Фото: ${cardName}`;
     popupFigcaption.textContent = cardName;
-    togglePopup(popupImage);
+    openPopup(popupImage);
   });
 
   cardElement.querySelector(".card__image").src = cardLink;
@@ -121,26 +124,24 @@ const fillInitialCards = () => {
 fillInitialCards();
 
 //Элементы добавления карточки
-let addCardsButton = page.querySelector(".profile__add-button");
+const addCardsButton = page.querySelector(".profile__add-button");
 
 //Попап добавления карточки
-let popupCard = document.querySelector("#popup-add-card");
-let closePopupCardButton = popupCard.querySelector(".popup__close-button");
-let formAddCard = popupCard.querySelector(".popup-form");
-let nameCard = popupCard.querySelector("#popup-input-place");
-let linkCard = popupCard.querySelector("#popup-input-link");
+const popupCard = document.querySelector("#popup-add-card");
+const closePopupCardButton = popupCard.querySelector(".popup__close-button");
+const formAddCard = popupCard.querySelector(".popup-form");
+const nameCard = popupCard.querySelector("#popup-input-place");
+const linkCard = popupCard.querySelector("#popup-input-link");
 
 const handleaAdCardFormSubmit = (evt) => {
   evt.preventDefault();
 
   addCard(nameCard.value, linkCard.value);
 
-  togglePopup(popupCard);
+  closePopup(popupCard);
   nameCard.value = "";
   linkCard.value = "";
 };
 
-addCardsButton.addEventListener("click", () => togglePopup(popupCard));
-closePopupCardButton.addEventListener("click", () => togglePopup(popupCard));
-popupCard.addEventListener("click", closePopupByClickOnOverlay);
+addCardsButton.addEventListener("click", () => openPopup(popupCard));
 formAddCard.addEventListener("submit", handleaAdCardFormSubmit);
