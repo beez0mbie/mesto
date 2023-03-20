@@ -133,7 +133,7 @@ const formAddCard = document.forms["card-form"];
 const nameCard = formAddCard.querySelector("#popup-input-place");
 const linkCard = formAddCard.querySelector("#popup-input-link");
 
-const handleaAdCardFormSubmit = (evt) => {
+const handleaAddCardFormSubmit = (evt) => {
   evt.preventDefault();
 
   addCard(nameCard.value, linkCard.value);
@@ -143,4 +143,4 @@ const handleaAdCardFormSubmit = (evt) => {
 };
 
 addCardsButton.addEventListener("click", () => openPopup(popupCard));
-formAddCard.addEventListener("submit", handleaAdCardFormSubmit);
+formAddCard.addEventListener("submit", handleaAddCardFormSubmit);
