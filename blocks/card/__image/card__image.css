@@ -4,6 +4,7 @@
   object-fit: cover;
   object-position: top;
   display: block;
+  cursor: pointer;
   background-color: #545454;
   color: #ffffff;
   border-radius: 10px 10px 0 0;
