@@ -73,16 +73,16 @@ const addCard = (cardName, cardLink) => {
     cardElement.remove();
   });
 
-  const image = cardElement.querySelector(".card__image");
-  image.addEventListener("click", () => {
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.addEventListener("click", () => {
     popupImageElement.src = cardLink;
     popupImageElement.alt = `Фото: ${cardName}`;
     popupFigcaption.textContent = cardName;
     openPopup(popupImage);
   });
 
-  cardElement.querySelector(".card__image").src = cardLink;
-  cardElement.querySelector(".card__image").alt = `Фото: ${cardName}`;
+  cardImage.src = cardLink;
+  cardImage.alt = `Фото: ${cardName}`;
   cardElement.querySelector(".card__title").textContent = cardName;
   cardsElement.prepend(cardElement);
 };
@@ -139,8 +139,7 @@ const handleaAdCardFormSubmit = (evt) => {
   addCard(nameCard.value, linkCard.value);
 
   closePopup(popupCard);
-  nameCard.value = "";
-  linkCard.value = "";
+  evt.target.reset();
 };
 
 addCardsButton.addEventListener("click", () => openPopup(popupCard));
