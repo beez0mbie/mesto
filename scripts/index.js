@@ -34,14 +34,10 @@ const profileJob = page.querySelector(".profile__subtitle");
 
 //Элементы попап меню профиля
 const popupProfile = document.querySelector("#popup-change-profile");
-const closePopupProfileButton = popupProfile.querySelector(
-  ".popup__close-button"
-);
-const formProfile = popupProfile.querySelector(".popup-form");
-const nameInput = popupProfile.querySelector("#popup-input-name");
-const jobInput = popupProfile.querySelector("#popup-input-job");
-nameInput.value = profileName.textContent;
-jobInput.value = profileJob.textContent;
+
+const formProfile = document.forms["profile-form"];
+const nameInput = formProfile.querySelector("#popup-input-name");
+const jobInput = formProfile.querySelector("#popup-input-job");
 
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
@@ -52,7 +48,11 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(popupProfile);
 };
 
-profileEditButton.addEventListener("click", () => openPopup(popupProfile));
+profileEditButton.addEventListener("click", () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(popupProfile);
+});
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 
 //Общие элементы карт
@@ -128,10 +128,10 @@ const addCardsButton = page.querySelector(".profile__add-button");
 
 //Попап добавления карточки
 const popupCard = document.querySelector("#popup-add-card");
-const closePopupCardButton = popupCard.querySelector(".popup__close-button");
-const formAddCard = popupCard.querySelector(".popup-form");
-const nameCard = popupCard.querySelector("#popup-input-place");
-const linkCard = popupCard.querySelector("#popup-input-link");
+
+const formAddCard = document.forms["card-form"];
+const nameCard = formAddCard.querySelector("#popup-input-place");
+const linkCard = formAddCard.querySelector("#popup-input-link");
 
 const handleaAdCardFormSubmit = (evt) => {
   evt.preventDefault();
