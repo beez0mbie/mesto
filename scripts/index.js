@@ -16,8 +16,8 @@ const closePopupByClickOnOverlay = (evt) => {
 let popupImage = document.querySelector("#popup-image");
 let popupImageElement = popupImage.querySelector(".popup-img__image");
 let popupFigcaption = popupImage.querySelector(".popup-img__figcaption");
-let popupImageClose = popupImage.querySelector(".popup__close-button");
-popupImageClose.addEventListener("click", () => togglePopup(popupImage));
+let closePopupImageButton = popupImage.querySelector(".popup__close-button");
+closePopupImageButton.addEventListener("click", () => togglePopup(popupImage));
 popupImage.addEventListener("click", closePopupByClickOnOverlay);
 
 //Элементы профиля
