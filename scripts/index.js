@@ -59,8 +59,8 @@ formProfile.addEventListener("submit", handleProfileFormSubmit);
 const cardsElement = page.querySelector(".cards");
 const templateCard = document.querySelector("#card").content;
 
-//Общий метод добавления карточек
-const addCard = (cardName, cardLink) => {
+//Создание карточки
+const createCard = (cardName, cardLink) => {
   const cardElement = templateCard.querySelector(".card").cloneNode(true);
 
   const heart = cardElement.querySelector(".card__heart");
@@ -84,6 +84,13 @@ const addCard = (cardName, cardLink) => {
   cardImage.src = cardLink;
   cardImage.alt = `Фото: ${cardName}`;
   cardElement.querySelector(".card__title").textContent = cardName;
+
+  return cardElement;
+};
+
+//Добавление карточки
+const addCard = (cardName, cardLink) => {
+  const cardElement = createCard(cardName, cardLink);
   cardsElement.prepend(cardElement);
 };
 
