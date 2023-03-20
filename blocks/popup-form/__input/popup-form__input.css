@@ -1,4 +1,4 @@
-.popup__input {
+.popup-form__input {
   padding-top: 30px;
   padding-bottom: 10px;
   border: 0;
@@ -9,16 +9,16 @@
   line-height: 17px;
 }
 
-.popup__input:focus {
+.popup-form__input:focus {
   outline: none;
 }
 
-.popup__input:nth-child(2) {
+.popup-form__input:nth-child(2) {
   padding-top: 45px;
 }
 
 @media screen and (max-width: 770px) {
-  .popup__input:nth-child(2) {
+  .popup-form__input:nth-child(2) {
     padding-top: 72px;
   }
 }

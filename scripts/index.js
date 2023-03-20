@@ -84,7 +84,7 @@ let popupProfile = document.querySelector("#popupChangeProfile");
 let closePopupProfileButton = popupProfile.querySelector(
   ".popup__close-button"
 );
-let formProfile = popupProfile.querySelector(".popup__form");
+let formProfile = popupProfile.querySelector(".popup-form");
 let nameInput = popupProfile.querySelector("#popup-input-name");
 let jobInput = popupProfile.querySelector("#popup-input-job");
 nameInput.value = profileName.textContent;
@@ -112,7 +112,7 @@ let addCardsButton = page.querySelector(".profile__add-button");
 //Попап добавления карточки
 let popupCard = document.querySelector("#popupAddCard");
 let closePopupCardButton = popupCard.querySelector(".popup__close-button");
-let formAddCard = popupCard.querySelector(".popup__form");
+let formAddCard = popupCard.querySelector(".popup-form");
 let nameCard = popupCard.querySelector("#popup-input-place");
 let linkCard = popupCard.querySelector("#popup-input-link");
 
