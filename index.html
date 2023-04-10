@@ -64,6 +64,8 @@
                 placeholder="Введите имя профиля"
                 class="popup-form__input"
                 required
+                minlength="2"
+                maxlength="40"
               />
               <span
                 class="popup-form__input-error popup-input-name-error"
@@ -77,6 +79,8 @@
                 placeholder="Введите название работы"
                 class="popup-form__input"
                 required
+                minlength="2"
+                maxlength="200"
               />
               <span
                 class="popup-form__input-error popup-input-job-error"
@@ -110,6 +114,8 @@
                 id="popup-input-place"
                 placeholder="Название"
                 class="popup-form__input"
+                minlength="2"
+                maxlength="30"
                 required
               />
               <span class="popup-form__input-error popup-input-place-error">
@@ -117,7 +123,7 @@
             </label>
             <label class="popup-form__field">
               <input
-                type="text"
+                type="url"
                 name="popup-input-link"
                 id="popup-input-link"
                 placeholder="Ссылка на картинку"
