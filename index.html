@@ -56,22 +56,32 @@
         <form action="./" name="profile-form" class="popup-form">
           <fieldset class="popup-form__fieldset">
             <h2 class="popup-form__title">Редактировать профиль</h2>
-            <input
-              type="text"
-              name="popup-input-name"
-              id="popup-input-name"
-              placeholder="Введите имя профиля"
-              class="popup-form__input"
-              required
-            />
-            <input
-              type="text"
-              name="popup-input-job"
-              id="popup-input-job"
-              placeholder="Введите название работы"
-              class="popup-form__input"
-              required
-            />
+            <label class="popup-form__field">
+              <input
+                type="text"
+                name="popup-input-name"
+                id="popup-input-name"
+                placeholder="Введите имя профиля"
+                class="popup-form__input"
+                required
+              />
+              <span
+                class="popup-form__input-error popup-input-name-error"
+              ></span>
+            </label>
+            <label class="popup-form__field">
+              <input
+                type="text"
+                name="popup-input-job"
+                id="popup-input-job"
+                placeholder="Введите название работы"
+                class="popup-form__input"
+                required
+              />
+              <span
+                class="popup-form__input-error popup-input-job-error"
+              ></span>
+            </label>
             <button
               type="submit"
               aria-label="Сохранить  изменения"
@@ -93,22 +103,30 @@
         <form action="./" name="card-form" class="popup-form">
           <fieldset class="popup-form__fieldset">
             <h2 class="popup-form__title">Новое Место</h2>
-            <input
-              type="text"
-              name="popup-input-place"
-              id="popup-input-place"
-              placeholder="Название"
-              class="popup-form__input"
-              required
-            />
-            <input
-              type="text"
-              name="popup-input-link"
-              id="popup-input-link"
-              placeholder="Ссылка на картинку"
-              class="popup-form__input"
-              required
-            />
+            <label class="popup-form__field">
+              <input
+                type="text"
+                name="popup-input-place"
+                id="popup-input-place"
+                placeholder="Название"
+                class="popup-form__input"
+                required
+              />
+              <span class="popup-form__input-error popup-input-place-error">
+              </span>
+            </label>
+            <label class="popup-form__field">
+              <input
+                type="text"
+                name="popup-input-link"
+                id="popup-input-link"
+                placeholder="Ссылка на картинку"
+                class="popup-form__input"
+                required
+              />
+              <span class="popup-form__input-error popup-input-link-error">
+              </span>
+            </label>
             <button
               type="submit"
               aria-label="Сохранить  изменения"
