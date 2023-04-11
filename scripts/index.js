@@ -12,12 +12,12 @@ const closePopupByEsc = (evt) => {
 //Общий метод открытия попапа
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
-  page.addEventListener("keydown", closePopupByEsc);
+  document.addEventListener("keydown", closePopupByEsc);
 };
 //Общий метод закрытия попапа
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
-  page.removeEventListener("keydown", closePopupByEsc);
+  document.removeEventListener("keydown", closePopupByEsc);
 };
 
 // Найти и закрыть все попапы по крестику или оверлею
