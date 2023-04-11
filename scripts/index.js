@@ -167,6 +167,7 @@ const handleaAddCardFormSubmit = (evt) => {
     addCard(nameCard.value, linkCard.value);
 
     closePopup(popupCard);
+    submitCardButton.classList.add("popup-form__button_disabled");
     evt.target.reset();
   }
 };
