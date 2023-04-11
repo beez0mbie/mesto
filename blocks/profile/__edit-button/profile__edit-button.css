@@ -5,6 +5,7 @@
   width: 24px;
   height: 24px;
   background: center no-repeat url(../../../images/Icon_pen.svg);
+  outline: none;
   cursor: pointer;
   transition: opacity 0.3s;
 }

@@ -1,12 +1,23 @@
 const page = document.querySelector(".page");
 
+// Закрытие попапа
+
+const closePopupByEsc = (evt) => {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+};
+
 //Общий метод открытия попапа
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
+  page.addEventListener("keydown", closePopupByEsc);
 };
 //Общий метод закрытия попапа
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
+  page.removeEventListener("keydown", closePopupByEsc);
 };
 
 // Найти и закрыть все попапы по крестику или оверлею
