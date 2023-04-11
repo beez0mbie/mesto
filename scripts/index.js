@@ -22,6 +22,8 @@ popups.forEach((popup) => {
   });
 });
 
+const disabledSubmitButtonClass = "popup-form__button_disabled";
+
 //Попап картинки
 const popupImage = document.querySelector("#popup-image");
 const popupImageElement = popupImage.querySelector(".popup-img__image");
@@ -38,15 +40,20 @@ const popupProfile = document.querySelector("#popup-change-profile");
 const formProfile = document.forms["profile-form"];
 const nameInput = formProfile.querySelector("#popup-input-name");
 const jobInput = formProfile.querySelector("#popup-input-job");
+const submitProfileButton = formProfile.querySelector(".popup-form__button");
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
 
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-
-  closePopup(popupProfile);
+  const hasInvalid = Array.from(submitProfileButton.classList).includes(
+    disabledSubmitButtonClass
+  );
+  if (!hasInvalid) {
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
+    closePopup(popupProfile);
+  }
 };
 
 profileEditButton.addEventListener("click", () => {
@@ -138,13 +145,19 @@ const popupCard = document.querySelector("#popup-add-card");
 const formAddCard = document.forms["card-form"];
 const nameCard = formAddCard.querySelector("#popup-input-place");
 const linkCard = formAddCard.querySelector("#popup-input-link");
+const submitCardButton = formAddCard.querySelector(".popup-form__button");
 
 const handleaAddCardFormSubmit = (evt) => {
   evt.preventDefault();
-  addCard(nameCard.value, linkCard.value);
+  const hasInvalid = Array.from(submitCardButton.classList).includes(
+    disabledSubmitButtonClass
+  );
+  if (!hasInvalid) {
+    addCard(nameCard.value, linkCard.value);
 
-  closePopup(popupCard);
-  evt.target.reset();
+    closePopup(popupCard);
+    evt.target.reset();
+  }
 };
 
 addCardsButton.addEventListener("click", () => openPopup(popupCard));
