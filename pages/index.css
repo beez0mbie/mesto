@@ -67,6 +67,7 @@
 @import url(../blocks/popup-form/__input-error/_active/popup-form__input-error_active.css);
 @import url(../blocks/popup-form/__input/_type/popup-form__input_type_error.css);
 @import url(../blocks/popup-form/__button/_disabled/popup-form__button_disabled.css);
+@import url(../blocks/popup/_overlay/popup_overlay_dark.css);
 
 /* popup-img */
 @import url(../blocks/popup-img/popup-img.css);
