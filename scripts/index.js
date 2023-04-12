@@ -39,17 +39,16 @@ const popupImageElement = popupImage.querySelector(".popup-img__image");
 const popupFigcaption = popupImage.querySelector(".popup-img__figcaption");
 
 //Элементы профиля
-const profileEditButton = page.querySelector(".profile__edit-button");
+const buttonOpenProfile = page.querySelector(".profile__edit-button");
 const profileName = page.querySelector(".profile__title");
 const profileJob = page.querySelector(".profile__subtitle");
 
 //Элементы попап меню профиля
 const popupProfile = document.querySelector("#popup-change-profile");
-
 const formProfile = document.forms["profile-form"];
 const nameInput = formProfile.querySelector("#popup-input-name");
 const jobInput = formProfile.querySelector("#popup-input-job");
-const submitProfileButton = formProfile.querySelector(".popup-form__button");
+
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
 
@@ -60,7 +59,7 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(popupProfile);
 };
 
-profileEditButton.addEventListener("click", () => {
+buttonOpenProfile.addEventListener("click", () => {
   openPopup(popupProfile);
 });
 formProfile.addEventListener("submit", handleProfileFormSubmit);
@@ -114,22 +113,22 @@ const fillInitialCards = (initialCards) => {
 fillInitialCards(initialCards);
 
 //Элементы добавления карточки
-const addCardsButton = page.querySelector(".profile__add-button");
+const buttonOpenPopupCard = page.querySelector(".profile__add-button");
 
 //Попап добавления карточки
 const popupCard = document.querySelector("#popup-add-card");
 const formAddCard = document.forms["card-form"];
 const nameCard = formAddCard.querySelector("#popup-input-place");
 const linkCard = formAddCard.querySelector("#popup-input-link");
-const submitCardButton = formAddCard.querySelector(".popup-form__button");
+const buttonSubmitCard = formAddCard.querySelector(".popup-form__button");
 
 const handleaAddCardFormSubmit = (evt) => {
   evt.preventDefault();
   addCard(nameCard.value, linkCard.value);
   closePopup(popupCard);
-  submitCardButton.classList.add("popup-form__button_disabled");
+  buttonSubmitCard.classList.add("popup-form__button_disabled");
   evt.target.reset();
 };
 
-addCardsButton.addEventListener("click", () => openPopup(popupCard));
+buttonOpenPopupCard.addEventListener("click", () => openPopup(popupCard));
 formAddCard.addEventListener("submit", handleaAddCardFormSubmit);
