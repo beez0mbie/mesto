@@ -1,5 +1,6 @@
 .content {
   min-width: 880px;
+  flex: 1;
 }
 
 @media screen and (max-width: 920px) {

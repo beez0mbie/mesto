@@ -2,7 +2,6 @@
   min-width: 880px;
   padding-top: 65px;
   padding-bottom: 60px;
-  justify-self: flex-start;
 }
 
 @media screen and (max-width: 920px) {
