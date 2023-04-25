@@ -1,3 +1,4 @@
+import { Card } from "./card.js";
 const page = document.querySelector(".page");
 
 // Закрытие попапа
@@ -64,42 +65,21 @@ buttonOpenProfile.addEventListener("click", () => {
 });
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 
-//Общие элементы карт
+//Секция карточек
 const cardsElement = page.querySelector(".cards");
-const templateCard = document.querySelector("#card").content;
-
-//Создание карточки
-const createCard = (cardName, cardLink) => {
-  const cardElement = templateCard.querySelector(".card").cloneNode(true);
-
-  const heart = cardElement.querySelector(".card__heart");
-  heart.addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__heart_active");
-  });
-
-  const trash = cardElement.querySelector(".card__trash");
-  trash.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  const cardImage = cardElement.querySelector(".card__image");
-  cardImage.addEventListener("click", () => {
-    popupImageElement.src = cardLink;
-    popupImageElement.alt = `Фото: ${cardName}`;
-    popupFigcaption.textContent = cardName;
-    openPopup(popupImage);
-  });
-
-  cardImage.src = cardLink;
-  cardImage.alt = `Фото: ${cardName}`;
-  cardElement.querySelector(".card__title").textContent = cardName;
-
-  return cardElement;
-};
 
 //Добавление карточки
 const addCard = (cardName, cardLink) => {
-  const cardElement = createCard(cardName, cardLink);
+  const card = new Card(
+    cardName,
+    cardLink,
+    "#card",
+    popupImageElement,
+    popupFigcaption,
+    openPopup,
+    popupImage
+  );
+  const cardElement = card.generateCard();
   cardsElement.prepend(cardElement);
 };
 
