@@ -1,4 +1,5 @@
 import { Card } from "./card.js";
+import { initialCards } from "./initial-cards.js";
 
 /**
  * Объявление переменных
