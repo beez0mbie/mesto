@@ -1,4 +1,5 @@
 import { Card } from "./card.js";
+import { FormValidator, config as validatorConfig } from "./validation.js";
 import { initialCards } from "./data.js";
 import { openPopup, closePopup } from "./utils.js";
 
@@ -17,15 +18,19 @@ const buttonOpenPopupCard = page.querySelector(".profile__add-button");
 const cardsElement = page.querySelector(".cards");
 //Элементы попап меню профиля
 const popupProfile = document.querySelector("#popup-change-profile");
-const formProfile = document.forms["profile-form"];
-const popupInputName = formProfile.querySelector("#popup-input-name");
-const popupInputJob = formProfile.querySelector("#popup-input-job");
+const profileForm = document.forms["profile-form"];
+const popupInputName = profileForm.querySelector("#popup-input-name");
+const popupInputJob = profileForm.querySelector("#popup-input-job");
 //Попап добавления карточки
 const popupCard = document.querySelector("#popup-add-card");
-const formAddCard = document.forms["card-form"];
-const nameCard = formAddCard.querySelector("#popup-input-place");
-const linkCard = formAddCard.querySelector("#popup-input-link");
-const buttonSubmitCard = formAddCard.querySelector(".popup-form__button");
+const cardForm = document.forms["card-form"];
+const nameCard = cardForm.querySelector("#popup-input-place");
+const linkCard = cardForm.querySelector("#popup-input-link");
+const buttonSubmitCard = cardForm.querySelector(".popup-form__button");
+
+/**
+ * Объявление функций
+ */
 
 //Обработчик сабмита для профиля
 const handleProfileFormSubmit = (evt) => {
@@ -61,7 +66,6 @@ const fillInitialCards = (initialCards) => {
 /**
  * Добавление слушателей
  */
-// Найти и закрыть все попапы по крестику или оверлею
 
 // Click
 buttonOpenProfile.addEventListener("click", () => {
@@ -70,8 +74,8 @@ buttonOpenProfile.addEventListener("click", () => {
 buttonOpenPopupCard.addEventListener("click", () => openPopup(popupCard));
 
 // Submit
-formProfile.addEventListener("submit", handleProfileFormSubmit);
-formAddCard.addEventListener("submit", handleaAddCardFormSubmit);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
+cardForm.addEventListener("submit", handleaAddCardFormSubmit);
 
 /**
  * Функциональная часть
@@ -83,3 +87,10 @@ popupInputJob.value = profileJob.textContent;
 
 // Заполнить карточки из предоставленных данных
 fillInitialCards(initialCards);
+
+// Включить валидацию
+const profileFormValidator = new FormValidator(validatorConfig, profileForm);
+const cardFormValidator = new FormValidator(validatorConfig, cardForm);
+
+profileFormValidator.enableValivation();
+cardFormValidator.enableValivation();

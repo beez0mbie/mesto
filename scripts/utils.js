@@ -3,6 +3,7 @@ export const popupImageElement = popupImage.querySelector(".popup-img__image");
 export const popupFigcaption = popupImage.querySelector(
   ".popup-img__figcaption"
 );
+// Найти и закрыть все попапы по крестику или оверлею
 const popups = document.querySelectorAll(".popup");
 
 popups.forEach((popup) => {
