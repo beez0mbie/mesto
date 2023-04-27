@@ -1,20 +1,15 @@
+import {
+  popupImage,
+  popupImageElement,
+  popupFigcaption,
+  openPopup,
+} from "./utils.js";
+
 export class Card {
-  constructor(
-    cardName,
-    cardLink,
-    templateSelector,
-    popupImageElement,
-    popupFigcaption,
-    openPopup,
-    popupImage
-  ) {
+  constructor(cardName, cardLink, templateSelector) {
     this._cardName = cardName;
     this._cardLink = cardLink;
     this._templateSelector = templateSelector;
-    this._popupImageElement = popupImageElement;
-    this._popupFigcaption = popupFigcaption;
-    this._openPopup = openPopup;
-    this._popupImage = popupImage;
   }
 
   _getTemplate() {
@@ -36,10 +31,10 @@ export class Card {
   }
 
   _handleOpenPopup() {
-    this._popupImageElement.src = this._cardLink;
-    this._popupImageElement.alt = `Фото: ${this._cardName}`;
-    this._popupFigcaption.textContent = this._cardName;
-    this._openPopup(this._popupImage);
+    popupImageElement.src = this._cardLink;
+    popupImageElement.alt = `Фото: ${this._cardName}`;
+    popupFigcaption.textContent = this._cardName;
+    openPopup(popupImage);
   }
 
   _setEventListeners() {

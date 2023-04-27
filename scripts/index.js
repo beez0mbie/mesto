@@ -1,5 +1,6 @@
 import { Card } from "./card.js";
-import { initialCards } from "./initial-cards.js";
+import { initialCards } from "./data.js";
+import { openPopup, closePopup } from "./utils.js";
 
 /**
  * Объявление переменных
@@ -14,12 +15,6 @@ const profileJob = page.querySelector(".profile__subtitle");
 const buttonOpenPopupCard = page.querySelector(".profile__add-button");
 //Секция карточек
 const cardsElement = page.querySelector(".cards");
-//Все попапы
-const popups = document.querySelectorAll(".popup");
-//Попап картинки
-const popupImage = document.querySelector("#popup-image");
-const popupImageElement = popupImage.querySelector(".popup-img__image");
-const popupFigcaption = popupImage.querySelector(".popup-img__figcaption");
 //Элементы попап меню профиля
 const popupProfile = document.querySelector("#popup-change-profile");
 const formProfile = document.forms["profile-form"];
@@ -31,30 +26,6 @@ const formAddCard = document.forms["card-form"];
 const nameCard = formAddCard.querySelector("#popup-input-place");
 const linkCard = formAddCard.querySelector("#popup-input-link");
 const buttonSubmitCard = formAddCard.querySelector(".popup-form__button");
-
-/**
- * Объявление функций
- */
-
-// Закрытие попапа на Esc
-const closePopupByEsc = (evt) => {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-};
-
-//Общий метод открытия попапа
-const openPopup = (popup) => {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closePopupByEsc);
-};
-
-//Общий метод закрытия попапа
-const closePopup = (popup) => {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closePopupByEsc);
-};
 
 //Обработчик сабмита для профиля
 const handleProfileFormSubmit = (evt) => {
@@ -75,15 +46,7 @@ const handleaAddCardFormSubmit = (evt) => {
 
 //Добавление карточки
 const addCard = (cardName, cardLink) => {
-  const card = new Card(
-    cardName,
-    cardLink,
-    "#card",
-    popupImageElement,
-    popupFigcaption,
-    openPopup,
-    popupImage
-  );
+  const card = new Card(cardName, cardLink, "#card");
   const cardElement = card.generateCard();
   cardsElement.prepend(cardElement);
 };
@@ -99,16 +62,6 @@ const fillInitialCards = (initialCards) => {
  * Добавление слушателей
  */
 // Найти и закрыть все попапы по крестику или оверлею
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (
-      evt.target.classList.contains("popup_opened") ||
-      evt.target.classList.contains("popup__close-button")
-    ) {
-      closePopup(popup);
-    }
-  });
-});
 
 // Click
 buttonOpenProfile.addEventListener("click", () => {
