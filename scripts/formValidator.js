@@ -1,15 +1,10 @@
-export const config = {
-  inputSelector: ".popup-form__input",
-  submitButtonSelector: ".popup-form__button",
-  inactiveButtonClass: "popup-form__button_disabled",
-  inputErrorClass: "popup-form__input_type_error",
-  errorClass: "popup-form__input-error_active",
-};
-
 export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
+    this._inputList = Array.from(
+      formElement.querySelectorAll(config.inputSelector)
+    );
   }
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(
@@ -37,12 +32,12 @@ export class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => !inputElement.validity.valid);
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
+  _toggleButtonState(buttonElement) {
+    if (this._hasInvalidInput()) {
       buttonElement.classList.add(this._config.inactiveButtonClass);
       buttonElement.setAttribute("disabled", "");
     } else {
@@ -52,17 +47,14 @@ export class FormValidator {
   }
 
   _setEvenListeners() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._config.inputSelector)
-    );
     const buttonElement = this._formElement.querySelector(
       this._config.submitButtonSelector
     );
-    this._toggleButtonState(inputList, buttonElement);
-    inputList.forEach((inputElement) => {
+    this._toggleButtonState(buttonElement);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(buttonElement);
       });
     });
   }

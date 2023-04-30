@@ -1,3 +1,11 @@
+export const validatorConfig = {
+  inputSelector: ".popup-form__input",
+  submitButtonSelector: ".popup-form__button",
+  inactiveButtonClass: "popup-form__button_disabled",
+  inputErrorClass: "popup-form__input_type_error",
+  errorClass: "popup-form__input-error_active",
+};
+
 export const initialCards = [
   {
     name: "Архыз",
