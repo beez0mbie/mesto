@@ -40,6 +40,9 @@ export class FormValidator {
     const buttonElement = this._formElement.querySelector(
       this._config.submitButtonSelector
     );
+    this._formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
     this.toggleButtonState(buttonElement);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -60,9 +63,6 @@ export class FormValidator {
   }
 
   enableValivation() {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
     this._setEvenListeners();
   }
 }
