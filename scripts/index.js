@@ -26,7 +26,6 @@ const popupCard = document.querySelector("#popup-add-card");
 const cardForm = document.forms["card-form"];
 const nameCard = cardForm.querySelector("#popup-input-place");
 const linkCard = cardForm.querySelector("#popup-input-link");
-const buttonSubmitCard = cardForm.querySelector(".popup-form__button");
 // Создание и присваивание экземляров класса
 const profileFormValidator = new FormValidator(validatorConfig, profileForm);
 const cardFormValidator = new FormValidator(validatorConfig, cardForm);
@@ -49,7 +48,7 @@ const handleaAddCardFormSubmit = (evt) => {
   addCard(nameCard.value, linkCard.value);
   closePopup(popupCard);
   evt.target.reset();
-  cardFormValidator.toggleButtonState(buttonSubmitCard);
+  cardFormValidator.toggleButtonState();
 };
 
 //Добавление карточки
@@ -92,6 +91,5 @@ popupInputJob.value = profileJob.textContent;
 fillInitialCards(initialCards);
 
 // Включить валидацию
-
 profileFormValidator.enableValivation();
 cardFormValidator.enableValivation();
