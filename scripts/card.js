@@ -30,6 +30,14 @@ export class Card {
     return this._element.querySelector(".card__image");
   }
 
+  _likeCard = () => {
+    this._heart.classList.toggle("card__heart_active");
+  };
+
+  _deleteCard = () => {
+    this._element.remove();
+  };
+
   _handleOpenPopup() {
     popupImageElement.src = this._cardLink;
     popupImageElement.alt = `Фото: ${this._cardName}`;
@@ -38,17 +46,9 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._heart.addEventListener("click", (evt) => {
-      evt.target.classList.toggle("card__heart_active");
-    });
-
-    this._trash.addEventListener("click", () => {
-      this._element.remove();
-    });
-
-    this._image.addEventListener("click", () => {
-      this._handleOpenPopup();
-    });
+    this._heart.addEventListener("click", () => this._likeCard());
+    this._trash.addEventListener("click", () => this._deleteCard());
+    this._image.addEventListener("click", () => this._handleOpenPopup());
   }
 
   generateCard() {
