@@ -7,8 +7,7 @@ export class PopupWithImage extends Popup {
     this._popupFigcaption = this._popup.querySelector(".popup-img__figcaption");
   }
 
-  open(imageLink, imageName) {
-    console.log(this._popup);
+  open(imageName, imageLink) {
     this._popupImageElement.src = imageLink;
     this._popupImageElement.alt = `Фото: ${imageName}`;
     this._popupFigcaption.textContent = imageName;
