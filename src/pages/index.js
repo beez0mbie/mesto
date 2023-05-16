@@ -24,7 +24,7 @@ const popupProfile = new PopupWithForm("#popup-change-profile", () => {
 });
 const popupWithImage = new PopupWithImage("#popup-image");
 
-const cardList = new Section(
+const cardsContainer = new Section(
   {
     dataItems: initialCards,
     renderer: (item) => {
@@ -32,7 +32,7 @@ const cardList = new Section(
         popupWithImage.open(name, link);
       });
       const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
+      cardsContainer.addItem(cardElement);
     },
   },
   ".cards"
@@ -48,7 +48,7 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
     }
   );
   const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  cardsContainer.addItem(cardElement);
 });
 
 const profileFormValidator = new FormValidator(validatorConfig, profileForm);
@@ -65,7 +65,7 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 userInfo.getUserInfo();
-cardList.renderItems();
+cardsContainer.renderItems();
 popupProfile.setEventListeners();
 popupWithImage.setEventListeners();
 popupCard.setEventListeners();
