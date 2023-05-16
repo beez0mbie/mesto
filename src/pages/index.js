@@ -61,11 +61,13 @@ buttonOpenProfile.addEventListener("click", () => {
   const userJobInput = document.querySelector("#popup-input-job");
   userNameInput.value = name;
   userJobInput.value = job;
+  profileFormValidator.resetValidation();
   profileFormValidator.toggleButtonState();
   popupProfile.open();
 });
 
 buttonOpenPopupCard.addEventListener("click", () => {
+  cardFormValidator.resetValidation();
   cardFormValidator.toggleButtonState();
   popupCard.open();
 });
