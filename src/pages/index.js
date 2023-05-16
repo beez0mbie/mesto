@@ -14,6 +14,13 @@ import {
 } from "../utils/constants.js";
 import "../pages/index.css";
 
+const getCardElement = (cardName, cardLink) => {
+  const card = new Card(cardName, cardLink, "#card", (name, link) => {
+    popupWithImage.open(name, link);
+  });
+  return card.generateCard();
+};
+
 const userInfo = new UserInfo({
   nameSelector: "#popup-input-name",
   jobSelector: "#popup-input-job",
@@ -28,10 +35,7 @@ const cardsContainer = new Section(
   {
     dataItems: initialCards,
     renderer: (item) => {
-      const card = new Card(item.name, item.link, "#card", (name, link) => {
-        popupWithImage.open(name, link);
-      });
-      const cardElement = card.generateCard();
+      const cardElement = getCardElement(item.name, item.link);
       cardsContainer.addItem(cardElement);
     },
   },
@@ -39,15 +43,10 @@ const cardsContainer = new Section(
 );
 
 const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
-  const card = new Card(
+  const cardElement = getCardElement(
     formData["popup-input-place"],
-    formData["popup-input-link"],
-    "#card",
-    (name, link) => {
-      popupWithImage.open(name, link);
-    }
+    formData["popup-input-link"]
   );
-  const cardElement = card.generateCard();
   cardsContainer.addItem(cardElement);
 });
 
