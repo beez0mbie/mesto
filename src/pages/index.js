@@ -62,13 +62,13 @@ buttonOpenProfile.addEventListener("click", () => {
   userNameInput.value = name;
   userJobInput.value = job;
   profileFormValidator.resetValidation();
-  profileFormValidator.toggleButtonState();
+  // profileFormValidator.toggleButtonState();
   popupProfile.open();
 });
 
 buttonOpenPopupCard.addEventListener("click", () => {
   cardFormValidator.resetValidation();
-  cardFormValidator.toggleButtonState();
+  // cardFormValidator.toggleButtonState();
   popupCard.open();
 });
 
