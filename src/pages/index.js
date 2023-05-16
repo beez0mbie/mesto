@@ -36,7 +36,6 @@ const popupWithImage = new PopupWithImage("#popup-image");
 
 const cardsContainer = new Section(
   {
-    dataItems: initialCards,
     renderer: (item) => {
       const cardElement = getCardElement(item.name, item.link);
       cardsContainer.addItem(cardElement);
@@ -72,7 +71,7 @@ buttonOpenPopupCard.addEventListener("click", () => {
   popupCard.open();
 });
 
-cardsContainer.renderItems();
+cardsContainer.renderItems(initialCards);
 popupProfile.setEventListeners();
 popupWithImage.setEventListeners();
 popupCard.setEventListeners();
