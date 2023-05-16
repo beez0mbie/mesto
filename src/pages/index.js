@@ -30,6 +30,7 @@ const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
   const newUserName = inputData["popup-input-name"];
   const newUserJob = inputData["popup-input-job"];
   userInfo.setUserInfo(newUserName, newUserJob);
+  popupProfile.close();
 });
 const popupWithImage = new PopupWithImage("#popup-image");
 
@@ -50,6 +51,7 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
     formData["popup-input-link"]
   );
   cardsContainer.addItem(cardElement);
+  popupCard.close();
 });
 
 const profileFormValidator = new FormValidator(validatorConfig, profileForm);
@@ -62,13 +64,11 @@ buttonOpenProfile.addEventListener("click", () => {
   userNameInput.value = name;
   userJobInput.value = job;
   profileFormValidator.resetValidation();
-  // profileFormValidator.toggleButtonState();
   popupProfile.open();
 });
 
 buttonOpenPopupCard.addEventListener("click", () => {
   cardFormValidator.resetValidation();
-  // cardFormValidator.toggleButtonState();
   popupCard.open();
 });
 
