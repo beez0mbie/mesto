@@ -22,12 +22,14 @@ const getCardElement = (cardName, cardLink) => {
 };
 
 const userInfo = new UserInfo({
-  nameSelector: "#popup-input-name",
-  jobSelector: "#popup-input-job",
+  nameSelector: ".profile__title",
+  jobSelector: ".profile__subtitle",
 });
 
-const popupProfile = new PopupWithForm("#popup-change-profile", () => {
-  userInfo.setUserInfo();
+const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
+  const newUserName = inputData["popup-input-name"];
+  const newUserJob = inputData["popup-input-job"];
+  userInfo.setUserInfo(newUserName, newUserJob);
 });
 const popupWithImage = new PopupWithImage("#popup-image");
 
@@ -54,8 +56,13 @@ const profileFormValidator = new FormValidator(validatorConfig, profileForm);
 const cardFormValidator = new FormValidator(validatorConfig, cardForm);
 
 buttonOpenProfile.addEventListener("click", () => {
+  const { name, job } = userInfo.getUserInfo();
+  const userNameInput = document.querySelector("#popup-input-name");
+  const userJobInput = document.querySelector("#popup-input-job");
+  userNameInput.value = name;
+  userJobInput.value = job;
+  profileFormValidator.toggleButtonState();
   popupProfile.open();
-  userInfo.getUserInfo();
 });
 
 buttonOpenPopupCard.addEventListener("click", () => {
@@ -63,7 +70,6 @@ buttonOpenPopupCard.addEventListener("click", () => {
   popupCard.open();
 });
 
-userInfo.getUserInfo();
 cardsContainer.renderItems();
 popupProfile.setEventListeners();
 popupWithImage.setEventListeners();
