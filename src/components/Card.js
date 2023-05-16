@@ -24,12 +24,17 @@ export class Card {
     return this._element.querySelector(".card__image");
   }
 
+  _getTitle() {
+    return this._element.querySelector(".card__title");
+  }
+
   _likeCard = () => {
     this._heart.classList.toggle("card__heart_active");
   };
 
   _deleteCard = () => {
     this._element.remove();
+    this._element = null;
   };
 
   _setEventListeners() {
@@ -45,10 +50,11 @@ export class Card {
     this._heart = this._getHeart();
     this._trash = this._getTrash();
     this._image = this._getImage();
+    this._title = this._getTitle();
     this._setEventListeners();
     this._image.src = this._cardLink;
     this._image.alt = `Фото: ${this._cardName}`;
-    this._element.querySelector(".card__title").textContent = this._cardName;
+    this._title.textContent = this._cardName;
     return this._element;
   }
 }
