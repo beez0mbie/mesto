@@ -11,8 +11,6 @@ import {
   buttonOpenPopupCard,
   profileForm,
   cardForm,
-  profileFormInputName,
-  profileFormInputJob,
 } from "../utils/constants.js";
 import "../pages/index.css";
 
@@ -60,8 +58,10 @@ const cardFormValidator = new FormValidator(validatorConfig, cardForm);
 
 buttonOpenProfile.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
-  profileFormInputName.value = name;
-  profileFormInputJob.value = job;
+  popupProfile.setInputValues({
+    "popup-input-name": name,
+    "popup-input-job": job,
+  });
   profileFormValidator.resetValidation();
   popupProfile.open();
 });
