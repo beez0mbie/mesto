@@ -4,8 +4,8 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Section } from "../components/Section.js";
 import { Card } from "../components/Card.js";
+import { Api } from "../components/Api.js";
 import {
-  initialCards,
   validatorConfig,
   buttonOpenProfile,
   buttonOpenPopupCard,
@@ -13,6 +13,14 @@ import {
   cardForm,
 } from "../utils/constants.js";
 import "../pages/index.css";
+
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-66/cards",
+  headers: {
+    authorization: "b5ca8ab9-6ed2-4347-9257-2874be1468dc",
+    "Content-Type": "application/json",
+  },
+});
 
 const getCardElement = (cardName, cardLink) => {
   const card = new Card(cardName, cardLink, "#card", (name, link) => {
@@ -71,7 +79,12 @@ buttonOpenPopupCard.addEventListener("click", () => {
   popupCard.open();
 });
 
-cardsContainer.renderItems(initialCards);
+api
+  .getInitialCards()
+  .then((result) => cardsContainer.renderItems(result))
+  .catch((err) => console.error(`Ошибка api.getInitialCards ${err}`));
+
+// cardsContainer.renderItems(initialCards);
 popupProfile.setEventListeners();
 popupWithImage.setEventListeners();
 popupCard.setEventListeners();
