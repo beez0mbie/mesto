@@ -15,7 +15,7 @@ import {
 import "../pages/index.css";
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-66/cards",
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-66",
   headers: {
     authorization: "b5ca8ab9-6ed2-4347-9257-2874be1468dc",
     "Content-Type": "application/json",
@@ -80,9 +80,13 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 api
-  .getInitialCards()
-  .then((result) => cardsContainer.renderItems(result))
-  .catch((err) => console.error(`Ошибка api.getInitialCards ${err}`));
+  .getAppInfo()
+  .then((res) => {
+    const [user, initialCards] = res;
+    userInfo.setUserInfo(user.name, user.about);
+    cardsContainer.renderItems(initialCards);
+  })
+  .catch((err) => console.error(`Error api.getAppInfo():\n ${err}`));
 
 // cardsContainer.renderItems(initialCards);
 popupProfile.setEventListeners();

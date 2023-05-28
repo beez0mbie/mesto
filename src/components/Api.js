@@ -1,19 +1,26 @@
 export class Api {
   constructor(options) {
     this.options = options;
-    this.token = options.headers.authorization;
+    this.headers = options.headers;
     this.baseUrl = options.baseUrl;
   }
 
-  getInitialCards() {
-    return fetch(this.baseUrl, {
-      headers: {
-        authorization: this.token,
-      },
-    }).then((res) => {
-      return res.ok
-        ? res.json()
-        : Promise.reject(`Ошибка: ${res.status}, ${res.statusText}`);
-    });
+  _getJsonPromise = (result) =>
+    result.ok
+      ? result.json()
+      : Promise.reject(`Impossible to get result.json(): ${result.status}`);
+
+  getUserInfo = () =>
+    fetch(`${this.baseUrl}/users/me `, {
+      headers: this.headers,
+    }).then(this._getJsonPromise);
+
+  getInitialCards = () =>
+    fetch(`${this.baseUrl}/car2ds`, {
+      headers: this.headers,
+    }).then(this._getJsonPromise);
+
+  getAppInfo() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 }
