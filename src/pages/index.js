@@ -37,7 +37,10 @@ const userInfo = new UserInfo({
 const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
   const newUserName = inputData["popup-input-name"];
   const newUserJob = inputData["popup-input-job"];
-  userInfo.setUserInfo(newUserName, newUserJob);
+  api
+    .updateUserInfo(newUserName, newUserJob)
+    .then((res) => userInfo.setUserInfo(res.name, res.about))
+    .catch((err) => console.error(`Error api.updateUserInfo():\n ${err}`));
   popupProfile.close();
 });
 const popupWithImage = new PopupWithImage("#popup-image");
@@ -53,11 +56,15 @@ const cardsContainer = new Section(
 );
 
 const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
-  const cardElement = getCardElement(
-    formData["popup-input-place"],
-    formData["popup-input-link"]
-  );
-  cardsContainer.addItem(cardElement);
+  const cardName = formData["popup-input-place"];
+  const cardLink = formData["popup-input-link"];
+  api
+    .addCard(cardName, cardLink)
+    .then((res) => {
+      const cardElement = getCardElement(res.name, res.link);
+      cardsContainer.addItem(cardElement);
+    })
+    .catch((err) => console.error(`Error api.addCard():\n ${err}`));
   popupCard.close();
 });
 

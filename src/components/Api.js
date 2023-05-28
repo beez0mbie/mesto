@@ -10,6 +10,26 @@ export class Api {
       ? result.json()
       : Promise.reject(`Impossible to get result.json(): ${result.status}`);
 
+  addCard = (name, link) =>
+    fetch(`${this.baseUrl}/cards`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._getJsonPromise);
+
+  updateUserInfo = (name, about) =>
+    fetch(`${this.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then(this._getJsonPromise);
+
   getUserInfo = () =>
     fetch(`${this.baseUrl}/users/me `, {
       headers: this.headers,
