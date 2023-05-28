@@ -16,7 +16,7 @@ export class Api {
     }).then(this._getJsonPromise);
 
   getInitialCards = () =>
-    fetch(`${this.baseUrl}/car2ds`, {
+    fetch(`${this.baseUrl}/cards`, {
       headers: this.headers,
     }).then(this._getJsonPromise);
 
