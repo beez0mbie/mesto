@@ -39,6 +39,8 @@
 
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__heart/card__heart.css);
+@import url(../blocks/card/__heart-container/card__heart-container.css);
+@import url(../blocks/card/__heart-counter/card__heart-counter.css);
 @import url(../blocks/card/__heart/_active/card__heart_active.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info/card__info.css);
