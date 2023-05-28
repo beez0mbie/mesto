@@ -1,7 +1,8 @@
-export class Card {
-  constructor(cardName, cardLink, templateSelector, handleCardClick) {
+export class DefaultCard {
+  constructor(cardName, cardLink, cardId, templateSelector, handleCardClick) {
     this._cardName = cardName;
     this._cardLink = cardLink;
+    this._cardId = cardId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -16,10 +17,6 @@ export class Card {
     return this._element.querySelector(".card__heart");
   }
 
-  _getTrash() {
-    return this._element.querySelector(".card__trash");
-  }
-
   _getImage() {
     return this._element.querySelector(".card__image");
   }
@@ -32,29 +29,26 @@ export class Card {
     this._heart.classList.toggle("card__heart_active");
   };
 
-  _deleteCard = () => {
-    this._element.remove();
-    this._element = null;
-  };
-
   _setEventListeners() {
     this._heart.addEventListener("click", () => this._likeCard());
-    this._trash.addEventListener("click", () => this._deleteCard());
     this._image.addEventListener("click", () =>
       this._handleCardClick(this._cardName, this._cardLink)
     );
   }
 
-  generateCard() {
+  _prepareCard() {
     this._element = this._getTemplate();
     this._heart = this._getHeart();
-    this._trash = this._getTrash();
     this._image = this._getImage();
     this._title = this._getTitle();
-    this._setEventListeners();
     this._image.src = this._cardLink;
     this._image.alt = `Фото: ${this._cardName}`;
     this._title.textContent = this._cardName;
+  }
+
+  generateCard() {
+    this._prepareCard();
+    this._setEventListeners();
     return this._element;
   }
 }
