@@ -1,7 +1,14 @@
 export class DefaultCard {
-  constructor(cardName, cardLink, templateSelector, handleCardClick) {
+  constructor(
+    cardName,
+    cardLink,
+    cardLikes,
+    templateSelector,
+    handleCardClick
+  ) {
     this._cardName = cardName;
     this._cardLink = cardLink;
+    this._cardLikes = cardLikes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -10,6 +17,10 @@ export class DefaultCard {
     const templateCard = document.querySelector(this._templateSelector).content;
     const cardElement = templateCard.querySelector(".card").cloneNode(true);
     return cardElement;
+  }
+
+  _getLikesCounter() {
+    return this._element.querySelector(".card__heart-counter");
   }
 
   _getHeart() {
@@ -40,6 +51,8 @@ export class DefaultCard {
     this._heart = this._getHeart();
     this._image = this._getImage();
     this._title = this._getTitle();
+    this._likesCounter = this._getLikesCounter();
+    this._likesCounter.textContent = this._cardLikes;
     this._image.src = this._cardLink;
     this._image.alt = `Фото: ${this._cardName}`;
     this._title.textContent = this._cardName;

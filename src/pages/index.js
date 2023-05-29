@@ -27,12 +27,13 @@ const api = new Api({
 
 let myId = "";
 
-const getCardElement = (cardName, cardLink, cardId, owner) => {
-  const isMyCard = myId.length > 0 && myId === owner._id;
+const getCardElement = (cardName, cardLink, cardId, cardOwner, cardLikes) => {
+  const isMyCard = myId.length > 0 && myId === cardOwner._id;
   const card = isMyCard
     ? new MyCard(
         cardName,
         cardLink,
+        cardLikes,
         "#my-card",
         (name, link) => {
           popupWithImage.open(name, link);
@@ -52,9 +53,15 @@ const getCardElement = (cardName, cardLink, cardId, owner) => {
           });
         }
       )
-    : new DefaultCard(cardName, cardLink, "#default-card", (name, link) => {
-        popupWithImage.open(name, link);
-      });
+    : new DefaultCard(
+        cardName,
+        cardLink,
+        cardLikes,
+        "#default-card",
+        (name, link) => {
+          popupWithImage.open(name, link);
+        }
+      );
   return card.generateCard();
 };
 
@@ -84,7 +91,8 @@ const cardsContainer = new Section(
         item.name,
         item.link,
         item._id,
-        item.owner
+        item.owner,
+        item.likes.length
       );
       cardsContainer.addItem(cardElement);
     },
@@ -102,7 +110,8 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
         res.name,
         res.link,
         res._id,
-        res.owner
+        res.owner,
+        res.likes.length
       );
       cardsContainer.addItem(cardElement);
     })
