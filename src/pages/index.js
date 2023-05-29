@@ -1,6 +1,10 @@
 import { FormValidator } from "../components/FormValidator.js";
 import { UserInfo } from "../components/UserInfo.js";
-import { PopupWithForm, PopupWithImage } from "../components/popup";
+import {
+  PopupWithForm,
+  PopupWithFormSubmit,
+  PopupWithImage,
+} from "../components/popup";
 import { DefaultCard, MyCard } from "../components/card";
 import { Section } from "../components/Section.js";
 import { Api } from "../components/Api.js";
@@ -29,24 +33,28 @@ const getCardElement = (cardName, cardLink, cardId, owner) => {
     ? new MyCard(
         cardName,
         cardLink,
-        cardId,
         "#my-card",
         (name, link) => {
           popupWithImage.open(name, link);
         },
         () => {
           popupDelete.open();
+          popupDelete.setSubmitAction(() => {
+            api
+              .deleteCard(cardId)
+              .then(() => {
+                card.deleteCard();
+                popupDelete.close();
+              })
+              .catch((err) =>
+                console.error(`Error api.deleteCard():\n ${err}`)
+              );
+          });
         }
       )
-    : new DefaultCard(
-        cardName,
-        cardLink,
-        cardId,
-        "#default-card",
-        (name, link) => {
-          popupWithImage.open(name, link);
-        }
-      );
+    : new DefaultCard(cardName, cardLink, "#default-card", (name, link) => {
+        popupWithImage.open(name, link);
+      });
   return card.generateCard();
 };
 
@@ -65,10 +73,7 @@ const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
   popupProfile.close();
 });
 
-//TODO
-const popupDelete = new PopupWithForm("#popup-delete", (as) => {
-  popupDelete.close();
-});
+const popupDelete = new PopupWithFormSubmit("#popup-delete");
 
 const popupWithImage = new PopupWithImage("#popup-image");
 

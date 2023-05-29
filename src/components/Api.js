@@ -20,6 +20,12 @@ export class Api {
       }),
     }).then(this._getJsonPromise);
 
+  deleteCard = (cardId) =>
+    fetch(`${this.baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then(this._getJsonPromise);
+
   updateUserInfo = (name, about) =>
     fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
