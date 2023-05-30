@@ -14,6 +14,8 @@ import {
   buttonOpenPopupCard,
   profileForm,
   cardForm,
+  avatarImage,
+  avatarForm,
 } from "../utils/constants.js";
 import "../pages/index.css";
 
@@ -118,6 +120,19 @@ const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
   popupProfile.close();
 });
 
+const popupAvatar = new PopupWithForm("#popup-avatar", (formData) => {
+  const cardLink = formData["popup-input-link"];
+  console.log(cardLink);
+  // api
+  //   .addCard(cardName, cardLink)
+  //   .then((res) => {
+  //     const cardElement = getCardElement(res);
+  //     cardsContainer.addItem(cardElement);
+  //   })
+  //   .catch((err) => console.error(`Error api.addCard():\n ${err}`));
+  popupAvatar.close();
+});
+
 const popupDelete = new PopupWithFormSubmit("#popup-delete");
 
 const popupWithImage = new PopupWithImage("#popup-image");
@@ -147,6 +162,7 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
 
 const profileFormValidator = new FormValidator(validatorConfig, profileForm);
 const cardFormValidator = new FormValidator(validatorConfig, cardForm);
+const avatarFormValidator = new FormValidator(validatorConfig, avatarForm);
 
 buttonOpenProfile.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
@@ -163,6 +179,11 @@ buttonOpenPopupCard.addEventListener("click", () => {
   popupCard.open();
 });
 
+avatarImage.addEventListener("click", () => {
+  avatarFormValidator.resetValidation();
+  popupAvatar.open();
+});
+
 api
   .getAppInfo()
   .then((res) => {
@@ -177,5 +198,7 @@ popupProfile.setEventListeners();
 popupWithImage.setEventListeners();
 popupCard.setEventListeners();
 popupDelete.setEventListeners();
+popupAvatar.setEventListeners();
 profileFormValidator.enableValivation();
 cardFormValidator.enableValivation();
+avatarFormValidator.enableValivation();

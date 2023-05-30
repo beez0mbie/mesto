@@ -1,8 +1,10 @@
 const page = document.querySelector(".page");
 export const buttonOpenProfile = page.querySelector(".profile__edit-button");
 export const buttonOpenPopupCard = page.querySelector(".profile__add-button");
+export const avatarImage = page.querySelector(".profile__logo-container");
 export const profileForm = document.forms["profile-form"];
 export const cardForm = document.forms["card-form"];
+export const avatarForm = document.forms["avatar-form"];
 
 export const validatorConfig = {
   inputSelector: ".popup-form__input",
