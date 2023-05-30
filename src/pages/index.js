@@ -108,6 +108,7 @@ const getCardElement = (item) => {
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__subtitle",
+  avatarSelector: ".profile__logo",
 });
 
 const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
@@ -121,15 +122,14 @@ const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
 });
 
 const popupAvatar = new PopupWithForm("#popup-avatar", (formData) => {
-  const cardLink = formData["popup-input-link"];
-  console.log(cardLink);
-  // api
-  //   .addCard(cardName, cardLink)
-  //   .then((res) => {
-  //     const cardElement = getCardElement(res);
-  //     cardsContainer.addItem(cardElement);
-  //   })
-  //   .catch((err) => console.error(`Error api.addCard():\n ${err}`));
+  const avatarLink = formData["popup-input-link"];
+  console.log(avatarLink);
+  api
+    .updateAvatar(avatarLink)
+    .then((res) => {
+      userInfo.setAvatar(res.avatar);
+    })
+    .catch((err) => console.error(`Error api.updateAvatar():\n ${err}`));
   popupAvatar.close();
 });
 
@@ -190,6 +190,7 @@ api
     const [user, initialCards] = res;
     myUserId = user._id;
     userInfo.setUserInfo(user.name, user.about);
+    userInfo.setAvatar(user.avatar);
     cardsContainer.renderItems(initialCards);
   })
   .catch((err) => console.error(`Error api.getAppInfo():\n ${err}`));

@@ -38,6 +38,15 @@ export class Api {
       headers: this.headers,
     }).then(this._getJsonPromise);
 
+  updateAvatar = (link) =>
+    fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then(this._getJsonPromise);
+
   updateUserInfo = (name, about) =>
     fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
