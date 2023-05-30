@@ -59,9 +59,9 @@ export class DefaultCard {
   _setEventListeners() {
     this._heart.addEventListener("click", () => {
       if (this._hasMyLike()) {
-        this._handleDislikeCard(this._cardId);
+        this._handleDislikeCard(this, this._cardId);
       } else {
-        this._handleLikeCard(this._cardId);
+        this._handleLikeCard(this, this._cardId);
       }
     });
     this._image.addEventListener("click", () =>

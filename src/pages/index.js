@@ -19,6 +19,8 @@ import {
 } from "../utils/constants.js";
 import "../pages/index.css";
 
+console.log("Wine");
+
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-66",
   headers: {
@@ -29,33 +31,39 @@ const api = new Api({
 
 let myUserId = null;
 
-const getCardElement = (item) => {
-  const isMyCard = myUserId !== null && myUserId === item.owner._id;
+const handleCardClick = (name, link) => {
+  popupWithImage.open(name, link);
+};
+
+const handleLikeCard = (card, id) => {
+  api
+    .likeCard(id)
+    .then((res) => {
+      card.setLikesInfo(res.likes);
+      card.updateLikes();
+    })
+    .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
+};
+
+const handleDislikeCard = (card, id) => {
+  api
+    .dislikeCard(id)
+    .then((res) => {
+      card.setLikesInfo(res.likes);
+      card.updateLikes();
+    })
+    .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
+};
+
+const getCardElement = (cardData) => {
+  const isMyCard = myUserId !== null && myUserId === cardData.owner._id;
   const card = isMyCard
     ? new MyCard(
         {
-          cardData: item,
-          handleCardClick: (name, link) => {
-            popupWithImage.open(name, link);
-          },
-          handleLikeCard: (id) => {
-            api
-              .likeCard(id)
-              .then((res) => {
-                card.setLikesInfo(res.likes);
-                card.updateLikes();
-              })
-              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
-          },
-          handleDislikeCard: (id) => {
-            api
-              .dislikeCard(id)
-              .then((res) => {
-                card.setLikesInfo(res.likes);
-                card.updateLikes();
-              })
-              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
-          },
+          cardData,
+          handleCardClick,
+          handleLikeCard,
+          handleDislikeCard,
           handleDeleteClick: (id) => {
             popupDelete.open();
             popupDelete.setSubmitAction(() => {
@@ -76,28 +84,10 @@ const getCardElement = (item) => {
       )
     : new DefaultCard(
         {
-          cardData: item,
-          handleCardClick: (name, link) => {
-            popupWithImage.open(name, link);
-          },
-          handleLikeCard: (id) => {
-            api
-              .likeCard(id)
-              .then((res) => {
-                card.setLikesInfo(res.likes);
-                card.updateLikes();
-              })
-              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
-          },
-          handleDislikeCard: (id) => {
-            api
-              .dislikeCard(id)
-              .then((res) => {
-                card.setLikesInfo(res.likes);
-                card.updateLikes();
-              })
-              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
-          },
+          cardData,
+          handleCardClick,
+          handleLikeCard,
+          handleDislikeCard,
         },
         "#default-card",
         myUserId
@@ -192,7 +182,7 @@ api
     myUserId = user._id;
     userInfo.setUserInfo(user.name, user.about);
     userInfo.setAvatar(user.avatar);
-    cardsContainer.renderItems(initialCards);
+    cardsContainer.renderItems(initialCards.reverse());
   })
   .catch((err) => console.error(`Error api.getAppInfo():\n ${err}`));
 
