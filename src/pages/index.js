@@ -124,7 +124,7 @@ const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
 });
 
 const popupAvatar = new PopupWithForm("#popup-avatar", (formData) => {
-  const avatarLink = formData["popup-input-link"];
+  const avatarLink = formData["popup-input-link-avatar"];
   api
     .updateAvatar(avatarLink)
     .then((res) => {

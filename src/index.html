@@ -20,7 +20,11 @@
       <main class="content">
         <section class="profile">
           <figure class="profile__logo-container">
-            <img src="" alt="Аватар" class="profile__logo" />
+            <img
+              src="<%=require('./images/Custo.jpg')%>"
+              alt="Аватар"
+              class="profile__logo"
+            />
           </figure>
           <div class="profile__info">
             <div class="profile__title-container">
@@ -156,13 +160,15 @@
             <label class="popup-form__field">
               <input
                 type="url"
-                name="popup-input-link"
-                id="popup-input-link"
+                name="popup-input-link-avatar"
+                id="popup-input-link-avatar"
                 placeholder="Ссылка на картинку"
                 class="popup-form__input"
                 required
               />
-              <span class="popup-form__input-error popup-input-link-error">
+              <span
+                class="popup-form__input-error popup-input-link-avatar-error"
+              >
               </span>
             </label>
             <button
