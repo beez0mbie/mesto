@@ -19,8 +19,6 @@ import {
 } from "../utils/constants.js";
 import "../pages/index.css";
 
-console.log("Wine");
-
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-66",
   headers: {
