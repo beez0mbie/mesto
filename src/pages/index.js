@@ -25,7 +25,7 @@ const api = new Api({
   },
 });
 
-let myUserId = "";
+let myUserId = null;
 
 const getCardElement = (item) => {
   const isMyCard = myUserId !== null && myUserId === item.owner._id;
@@ -40,8 +40,17 @@ const getCardElement = (item) => {
             api
               .likeCard(id)
               .then((res) => {
-                console.log(res.likes.length);
-                card.likeCard(res.likes.length);
+                card.setLikesInfo(res.likes);
+                card.updateLikes();
+              })
+              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
+          },
+          handleDislikeCard: (id) => {
+            api
+              .dislikeCard(id)
+              .then((res) => {
+                card.setLikesInfo(res.likes);
+                card.updateLikes();
               })
               .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
           },
@@ -73,8 +82,17 @@ const getCardElement = (item) => {
             api
               .likeCard(id)
               .then((res) => {
-                console.log(res.likes.length);
-                card.likeCard(res.likes.length);
+                card.setLikesInfo(res.likes);
+                card.updateLikes();
+              })
+              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
+          },
+          handleDislikeCard: (id) => {
+            api
+              .dislikeCard(id)
+              .then((res) => {
+                card.setLikesInfo(res.likes);
+                card.updateLikes();
               })
               .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
           },
@@ -107,7 +125,6 @@ const popupWithImage = new PopupWithImage("#popup-image");
 const cardsContainer = new Section(
   {
     renderer: (item) => {
-      console.log(item._id, item.name, item.likes.length);
       const cardElement = getCardElement(item);
       cardsContainer.addItem(cardElement);
     },
@@ -121,7 +138,6 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
   api
     .addCard(cardName, cardLink)
     .then((res) => {
-      console.log(res.name, res.likes.length);
       const cardElement = getCardElement(res);
       cardsContainer.addItem(cardElement);
     })
@@ -152,7 +168,6 @@ api
   .then((res) => {
     const [user, initialCards] = res;
     myUserId = user._id;
-    console.log("myUserId", myUserId);
     userInfo.setUserInfo(user.name, user.about);
     cardsContainer.renderItems(initialCards);
   })

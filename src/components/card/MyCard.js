@@ -2,7 +2,13 @@ import { DefaultCard } from "./DefaultCard";
 
 export class MyCard extends DefaultCard {
   constructor(
-    { cardData, handleCardClick, handleLikeCard, handleDeleteClick },
+    {
+      cardData,
+      handleCardClick,
+      handleLikeCard,
+      handleDislikeCard,
+      handleDeleteClick,
+    },
     templateSelector,
     userId
   ) {
@@ -11,6 +17,7 @@ export class MyCard extends DefaultCard {
         cardData,
         handleCardClick,
         handleLikeCard,
+        handleDislikeCard,
       },
       templateSelector,
       userId

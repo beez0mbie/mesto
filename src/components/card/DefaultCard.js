@@ -1,17 +1,17 @@
 export class DefaultCard {
   constructor(
-    { cardData, handleCardClick, handleLikeCard },
+    { cardData, handleCardClick, handleLikeCard, handleDislikeCard },
     templateSelector,
     userId
   ) {
     this._cardName = cardData.name;
     this._cardLink = cardData.link;
     this._cardLikesData = cardData.likes;
-    this._cardLikes = cardData.likes.length;
     this._cardId = cardData._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleLikeCard = handleLikeCard;
+    this._handleDislikeCard = handleDislikeCard;
     this._userId = userId;
   }
 
@@ -39,20 +39,31 @@ export class DefaultCard {
 
   _hasMyLike() {
     const usersIdLikes = this._cardLikesData.map((likeData) => likeData._id);
-    console.log(usersIdLikes);
     return usersIdLikes.some((id) => id === this._userId);
   }
 
-  likeCard = (count) => {
+  setLikesInfo(likes) {
+    this._cardLikesData = likes;
+  }
+
+  updateLikes = () => {
     this._likesCounter = this._getLikesCounter();
-    this._likesCounter.textContent = count;
-    this._heart.classList.toggle("card__heart_active");
+    this._likesCounter.textContent = this._cardLikesData.length;
+    if (this._hasMyLike()) {
+      this._heart.classList.add("card__heart_active");
+    } else {
+      this._heart.classList.remove("card__heart_active");
+    }
   };
 
   _setEventListeners() {
-    this._heart.addEventListener("click", () =>
-      this._handleLikeCard(this._cardId)
-    );
+    this._heart.addEventListener("click", () => {
+      if (this._hasMyLike()) {
+        this._handleDislikeCard(this._cardId);
+      } else {
+        this._handleLikeCard(this._cardId);
+      }
+    });
     this._image.addEventListener("click", () =>
       this._handleCardClick(this._cardName, this._cardLink)
     );
@@ -64,10 +75,13 @@ export class DefaultCard {
     this._image = this._getImage();
     this._title = this._getTitle();
     this._likesCounter = this._getLikesCounter();
-    this._likesCounter.textContent = this._cardLikes;
+    this._likesCounter.textContent = this._cardLikesData.length;
     this._image.src = this._cardLink;
     this._image.alt = `Фото: ${this._cardName}`;
     this._title.textContent = this._cardName;
+    if (this._hasMyLike()) {
+      this._heart.classList.add("card__heart_active");
+    }
   }
 
   generateCard() {
