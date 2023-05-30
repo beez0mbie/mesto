@@ -116,21 +116,22 @@ const popupProfile = new PopupWithForm("#popup-change-profile", (inputData) => {
   const newUserJob = inputData["popup-input-job"];
   api
     .updateUserInfo(newUserName, newUserJob)
-    .then((res) => userInfo.setUserInfo(res.name, res.about))
+    .then((res) => {
+      userInfo.setUserInfo(res.name, res.about);
+      popupProfile.close();
+    })
     .catch((err) => console.error(`Error api.updateUserInfo():\n ${err}`));
-  popupProfile.close();
 });
 
 const popupAvatar = new PopupWithForm("#popup-avatar", (formData) => {
   const avatarLink = formData["popup-input-link"];
-  console.log(avatarLink);
   api
     .updateAvatar(avatarLink)
     .then((res) => {
       userInfo.setAvatar(res.avatar);
+      popupAvatar.close();
     })
     .catch((err) => console.error(`Error api.updateAvatar():\n ${err}`));
-  popupAvatar.close();
 });
 
 const popupDelete = new PopupWithFormSubmit("#popup-delete");
@@ -155,9 +156,9 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
     .then((res) => {
       const cardElement = getCardElement(res);
       cardsContainer.addItem(cardElement);
+      popupCard.close();
     })
     .catch((err) => console.error(`Error api.addCard():\n ${err}`));
-  popupCard.close();
 });
 
 const profileFormValidator = new FormValidator(validatorConfig, profileForm);
