@@ -25,42 +25,62 @@ const api = new Api({
   },
 });
 
-let myId = "";
+let myUserId = "";
 
-const getCardElement = (cardName, cardLink, cardId, cardOwner, cardLikes) => {
-  const isMyCard = myId.length > 0 && myId === cardOwner._id;
+const getCardElement = (item) => {
+  const isMyCard = myUserId !== null && myUserId === item.owner._id;
   const card = isMyCard
     ? new MyCard(
-        cardName,
-        cardLink,
-        cardLikes,
-        "#my-card",
-        (name, link) => {
-          popupWithImage.open(name, link);
-        },
-        () => {
-          popupDelete.open();
-          popupDelete.setSubmitAction(() => {
+        {
+          cardData: item,
+          handleCardClick: (name, link) => {
+            popupWithImage.open(name, link);
+          },
+          handleLikeCard: (id) => {
             api
-              .deleteCard(cardId)
-              .then(() => {
-                card.deleteCard();
-                popupDelete.close();
+              .likeCard(id)
+              .then((res) => {
+                console.log(res.likes.length);
+                card.likeCard(res.likes.length);
               })
-              .catch((err) =>
-                console.error(`Error api.deleteCard():\n ${err}`)
-              );
-          });
-        }
+              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
+          },
+          handleDeleteClick: (id) => {
+            popupDelete.open();
+            popupDelete.setSubmitAction(() => {
+              api
+                .deleteCard(id)
+                .then(() => {
+                  card.deleteCard();
+                  popupDelete.close();
+                })
+                .catch((err) =>
+                  console.error(`Error api.deleteCard():\n ${err}`)
+                );
+            });
+          },
+        },
+        "#my-card",
+        myUserId
       )
     : new DefaultCard(
-        cardName,
-        cardLink,
-        cardLikes,
+        {
+          cardData: item,
+          handleCardClick: (name, link) => {
+            popupWithImage.open(name, link);
+          },
+          handleLikeCard: (id) => {
+            api
+              .likeCard(id)
+              .then((res) => {
+                console.log(res.likes.length);
+                card.likeCard(res.likes.length);
+              })
+              .catch((err) => console.error(`Error api.likeCard():\n ${err}`));
+          },
+        },
         "#default-card",
-        (name, link) => {
-          popupWithImage.open(name, link);
-        }
+        myUserId
       );
   return card.generateCard();
 };
@@ -87,13 +107,8 @@ const popupWithImage = new PopupWithImage("#popup-image");
 const cardsContainer = new Section(
   {
     renderer: (item) => {
-      const cardElement = getCardElement(
-        item.name,
-        item.link,
-        item._id,
-        item.owner,
-        item.likes.length
-      );
+      console.log(item._id, item.name, item.likes.length);
+      const cardElement = getCardElement(item);
       cardsContainer.addItem(cardElement);
     },
   },
@@ -106,13 +121,8 @@ const popupCard = new PopupWithForm("#popup-add-card", (formData) => {
   api
     .addCard(cardName, cardLink)
     .then((res) => {
-      const cardElement = getCardElement(
-        res.name,
-        res.link,
-        res._id,
-        res.owner,
-        res.likes.length
-      );
+      console.log(res.name, res.likes.length);
+      const cardElement = getCardElement(res);
       cardsContainer.addItem(cardElement);
     })
     .catch((err) => console.error(`Error api.addCard():\n ${err}`));
@@ -141,7 +151,8 @@ api
   .getAppInfo()
   .then((res) => {
     const [user, initialCards] = res;
-    myId = user._id;
+    myUserId = user._id;
+    console.log("myUserId", myUserId);
     userInfo.setUserInfo(user.name, user.about);
     cardsContainer.renderItems(initialCards);
   })

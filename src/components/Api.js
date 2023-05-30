@@ -26,6 +26,12 @@ export class Api {
       headers: this.headers,
     }).then(this._getJsonPromise);
 
+  likeCard = (cardId) =>
+    fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this.headers,
+    }).then(this._getJsonPromise);
+
   updateUserInfo = (name, about) =>
     fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",

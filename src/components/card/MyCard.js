@@ -2,13 +2,19 @@ import { DefaultCard } from "./DefaultCard";
 
 export class MyCard extends DefaultCard {
   constructor(
-    cardName,
-    cardLink,
+    { cardData, handleCardClick, handleLikeCard, handleDeleteClick },
     templateSelector,
-    handleCardClick,
-    handleDeleteClick
+    userId
   ) {
-    super(cardName, cardLink, templateSelector, handleCardClick);
+    super(
+      {
+        cardData,
+        handleCardClick,
+        handleLikeCard,
+      },
+      templateSelector,
+      userId
+    );
     this._handleDeleteClick = handleDeleteClick;
   }
   _getTrash() {
@@ -23,7 +29,7 @@ export class MyCard extends DefaultCard {
   _setEventListeners() {
     super._setEventListeners();
     this._trash.addEventListener("click", () => {
-      this._handleDeleteClick();
+      this._handleDeleteClick(this._cardId);
     });
   }
 

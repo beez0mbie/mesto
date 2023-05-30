@@ -1,16 +1,18 @@
 export class DefaultCard {
   constructor(
-    cardName,
-    cardLink,
-    cardLikes,
+    { cardData, handleCardClick, handleLikeCard },
     templateSelector,
-    handleCardClick
+    userId
   ) {
-    this._cardName = cardName;
-    this._cardLink = cardLink;
-    this._cardLikes = cardLikes;
+    this._cardName = cardData.name;
+    this._cardLink = cardData.link;
+    this._cardLikesData = cardData.likes;
+    this._cardLikes = cardData.likes.length;
+    this._cardId = cardData._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleLikeCard = handleLikeCard;
+    this._userId = userId;
   }
 
   _getTemplate() {
@@ -35,12 +37,22 @@ export class DefaultCard {
     return this._element.querySelector(".card__title");
   }
 
-  _likeCard = () => {
+  _hasMyLike() {
+    const usersIdLikes = this._cardLikesData.map((likeData) => likeData._id);
+    console.log(usersIdLikes);
+    return usersIdLikes.some((id) => id === this._userId);
+  }
+
+  likeCard = (count) => {
+    this._likesCounter = this._getLikesCounter();
+    this._likesCounter.textContent = count;
     this._heart.classList.toggle("card__heart_active");
   };
 
   _setEventListeners() {
-    this._heart.addEventListener("click", () => this._likeCard());
+    this._heart.addEventListener("click", () =>
+      this._handleLikeCard(this._cardId)
+    );
     this._image.addEventListener("click", () =>
       this._handleCardClick(this._cardName, this._cardLink)
     );
